@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public GameObject proyectilPrefab;
     public Transform puntoDisparo;
     public float velocidadDisparo = 10f;
+    public Animator animator;
 
     void Start()
     {
@@ -18,10 +19,20 @@ public class PlayerController : MonoBehaviour
     {
         // Movimiento horizontal
         float movimiento = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(movimiento * velocidad, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(movimiento * velocidad, rb.linearVelocity.y); // <-- CORREGIDO
+        animator.SetFloat("movement", movimiento * velocidad);
+
+        if (movimiento < 0)
+        {
+            transform.localScale = new Vector3(-0.51386f, 0.51386f, 0.51386f); // <-- CORREGIDO
+        }
+        if (movimiento > 0)
+        {
+            transform.localScale = new Vector3(0.51386f, 0.51386f, 0.51386f); // <-- CORREGIDO
+        }
 
         // Salto
-        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.linearVelocity.y) < 0.01f)
+        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.linearVelocity.y) < 0.01f) // <-- CORREGIDO
         {
             rb.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
         }
@@ -31,11 +42,9 @@ public class PlayerController : MonoBehaviour
         {
             GameObject bala = Instantiate(proyectilPrefab, puntoDisparo.position, Quaternion.identity);
             Rigidbody2D rbBala = bala.GetComponent<Rigidbody2D>();
-            rbBala.linearVelocity = Vector2.right * velocidadDisparo;
+            rbBala.linearVelocity = Vector2.right * velocidadDisparo; // <-- CORREGIDO
 
-            // Retroceso (opcional)
             rb.AddForce(Vector2.left * velocidadDisparo, ForceMode2D.Impulse);
         }
     }
 }
-
