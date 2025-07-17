@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         // Movimiento horizontal
         float movimiento = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(movimiento * velocidad, rb.linearVelocity.y); // ✅ CORREGIDO
+        rb.linearVelocity = new Vector2(movimiento * velocidad, rb.linearVelocity.y);
         animator.SetFloat("movement", Mathf.Abs(movimiento * velocidad));
 
         // Voltear personaje según dirección
