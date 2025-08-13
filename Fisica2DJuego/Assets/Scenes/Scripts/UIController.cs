@@ -11,8 +11,7 @@ public class UIController : MonoBehaviour
     public Slider sliderMasa;
     public Slider sliderFriccion;
     public Slider sliderSalto;
-    public Slider sliderFuerzaDisparo; 
-    public Slider sliderAngulo;
+    public Slider sliderFuerzaDisparo;
     public Slider sliderAire;
     public Slider sliderRetroceso;
 
@@ -21,31 +20,25 @@ public class UIController : MonoBehaviour
     public TMP_Text valorMasa;
     public TMP_Text valorFriccion;
     public TMP_Text valorSalto;
-    public TMP_Text valorFuerzaDisparo; 
-    public TMP_Text valorAngulo;
+    public TMP_Text valorFuerzaDisparo;
     public TMP_Text valorAire;
     public TMP_Text valorRetroceso;
-
-
-
 
     void Start()
     {
         RectTransform rt = GetComponent<RectTransform>();
-        rt.SetParent(transform.root, false); 
+        rt.SetParent(transform.root, false);
         rt.anchorMin = new Vector2(0, 1);
         rt.anchorMax = new Vector2(0, 1);
         rt.pivot = new Vector2(0, 1);
         rt.anchoredPosition = new Vector2(10, -10);
         rt.localScale = new Vector3(0.7f, 0.7f, 1f);
 
-
         // Asignar valores iniciales
         sliderGravedad.value = Physics2D.gravity.y;
         sliderMasa.value = player.GetComponent<Rigidbody2D>().mass;
         sliderFriccion.value = GetFriction();
         sliderSalto.value = player.fuerzaSalto;
-
         sliderAire.value = player.GetComponent<Rigidbody2D>().linearDamping;
         sliderRetroceso.value = player.retroceso;
 
@@ -70,8 +63,8 @@ public class UIController : MonoBehaviour
             valorSalto.text = v.ToString("F2");
         });
 
-        sliderFuerzaDisparo.onValueChanged.AddListener((v) => { 
-            player.fuerzaDisparo = v; 
+        sliderFuerzaDisparo.onValueChanged.AddListener((v) => {
+            player.fuerzaDisparo = v;
             valorFuerzaDisparo.text = v.ToString("F2");
         });
 
@@ -91,7 +84,6 @@ public class UIController : MonoBehaviour
         valorFriccion.text = sliderFriccion.value.ToString("F2");
         valorSalto.text = sliderSalto.value.ToString("F2");
         valorFuerzaDisparo.text = sliderFuerzaDisparo.value.ToString("F2");
-        valorAngulo.text = sliderAngulo.value.ToString("F1") + "°";
         valorAire.text = sliderAire.value.ToString("F2");
         valorRetroceso.text = sliderRetroceso.value.ToString("F2");
     }
@@ -108,6 +100,4 @@ public class UIController : MonoBehaviour
         if (col.sharedMaterial != null)
             col.sharedMaterial.friction = v;
     }
-
-
 }

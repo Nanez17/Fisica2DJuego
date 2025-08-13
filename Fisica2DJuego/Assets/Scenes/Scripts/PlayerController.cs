@@ -91,6 +91,13 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("KillZone"))
             Respawn();
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("KillZone"))
+        {
+            Respawn();
+        }
+    }
 
     void Respawn()
     {
