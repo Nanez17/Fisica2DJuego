@@ -12,7 +12,6 @@ public class Bullseye : MonoBehaviour
             DoorController.UnlockDoor(doorID);
 
             Destroy(gameObject);
-            Destroy(collision.gameObject);
 
             ScoreManager.instance.AddPoints(points);
         }
