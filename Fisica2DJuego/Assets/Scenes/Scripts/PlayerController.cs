@@ -120,10 +120,14 @@ public class PlayerController : MonoBehaviour
                 Vector2 direccion = (mouseWorldPos - puntoDisparo.position);
                 direccion.Normalize();
 
+                // Fuerza inicial
                 rbBala.linearVelocity = direccion * fuerzaDisparo;
 
-                // Retroceso al disparar
-                rb.AddForce(-direccion * retroceso, ForceMode2D.Impulse);
+                // Retroceso
+                float retrocesoCalculado = retroceso * (fuerzaDisparo / 10f);
+                
+
+                rb.AddForce(-direccion * retrocesoCalculado, ForceMode2D.Impulse);
             }
             else
             {
